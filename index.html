@@ -1,73 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;300;400&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BunkMate</title>
+    <title>Skippit</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         
         <header>
-            <h1>BunkMate</h1>
-            <p class="tagline">Calculated Freedom</p>
+            <img src="logo.png">
         </header>
-        
-        
 
-        <div class="card">
-            <div class="form-right">
-                <div class="input-group">
-                    <label for="attended">Classes Attended</label>
-                    <input type="number" id="attended" placeholder="0">
-                </div>
+        <div class="main-btn">
+                <button id="start">DASHBOARD</button>
+                <button>SCHEDULE</button>
+        </div>
 
-                <div class="input-group">
-                    <label for="total">Total Classes</label>
-                    <input type="number" id="total" placeholder="0">
-                </div>
-            
+        <hr>
 
-                <div class="input-group">
-                    <label for="target">Target Percentage (%)</label>
-                    <input type="number" id="target" value="75">
+        <h2>Today's Schedule</h2>
+
+        <div class="card-container">
+            <div class="attendance-card">
+                <div class="card-info">
+                    <h2>EG</h2>
+                    <div class="stats">
+                        <p>23 Attended</p>
+                        <p>Bunked</p>
+                        <p>Total</p>
+                        <div class="prediction">
+                            <p>Can skip next 20 classes</p>
+                            <p>Requirement: 75%</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="weekly_schedule">
-                <p id="week-txt">Weekly Schedule</p>
-                <div class="week-btn">
-                        <button class="active">Mon</button>
-                        <button>Tue</button>
-                        <button>Wed</button>
-                        <button>Thu</button>
-                        <button>Fri</button>
-                        <button>Sat</button>
-                        <button>Sun</button>
-
-                </div>
-
-                <div class="input-schedule">
-                    <label for="prd1">Period 1</label>
-                    <input type="text" placeholder="Enter Subject">
-
-                    <label for="prd2">Period 2</label>
-                    <input type="text" placeholder="Enter Subject">
-
-                    <label for="prd2">Period 3</label>
-                    <input type="text" placeholder="Enter Subject">
-
-                    <label for="prd2">Period 4</label>
-                    <input type="text" placeholder="Enter Subject">
-
-
-
-                </div>
-
-            </div>
-
-            <button class="btn">Calculate</button>
         </div>
 
 
