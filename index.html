@@ -18,7 +18,7 @@
 
         <div class="main-btn">
                 <button id="start">DASHBOARD</button>
-                <button>SCHEDULE</button>
+                <a href="schedule.html">SCHEDULE</a>
         </div>
 
         <hr>
@@ -29,16 +29,28 @@
             <div class="attendance-card">
                 <div class="card-info">
                     <h2>EG</h2>
+                    
                     <div class="stats">
                         <p>23 Attended</p>
-                        <p>Bunked</p>
-                        <p>Total</p>
+                        <p>15 Bunked</p>
+                        <p>38 Total</p>
                         <div class="prediction">
                             <p>Can skip next 20 classes</p>
                             <p>Requirement: 75%</p>
                         </div>
                     </div>
                 </div>
+
+                <div class="progress-bar" style="--percent: 67">
+                    <span class="progress-value">67%</span>
+                </div> 
+            </div> 
+
+            <div class="options">
+                <button id="present-option">P</button>
+                <button id="bunk-option">B</button>
+                <button id="cancelled-option">C</button>
+                    
             </div>
         </div>
 
