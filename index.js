@@ -1,7 +1,7 @@
 function switchTab(tabName) {
     const dashboardView = document.getElementById('dashboard-view')
     const scheduleView = document.getElementById('schedule-view')
-    
+
     const dashboardBtn = document.querySelector("button[onclick*='dashboard']");
     const scheduleBtn = document.querySelector("button[onclick*='schedule']");
     
@@ -20,4 +20,12 @@ function switchTab(tabName) {
         dashboardBtn.removeAttribute('id')
         scheduleBtn.setAttribute('id','start')
     }
+}
+
+function toggle() {
+    let blur = document.getElementById('blur')
+    blur.classList.toggle('active')
+
+    let PopUp = document.getElementById("popup");
+    PopUp.classList.toggle("active");
 }

@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Original+Surfer&display=swap');
 
 body {
     margin: 0;
     padding: 0;
     background-image: url(Skippit.png);
     background-size: cover;
-    font-family: "Work Sans","Ubuntu";
+    font-family: "Work Sans","Ubuntu","Original Surfer";
     min-height: 100vh;
 }
 
@@ -110,8 +111,7 @@ header img {
 
 hr {
     border: none;
-    border-top: 3px dotted rgb(56, 55, 55);
-    background-color: transparent;
+    border-top: 3px dotted rgba(147, 144, 144, 0.493);
     height: 1px;
     width: calc(100% + 40px); 
     margin: 20px -20px;
@@ -339,6 +339,10 @@ h2 {
     font-weight: bolder;
 }
 
+.empty-state{
+    margin-top: 50px;
+}
+
 .subjects hr{
     border: none;
     width: 250px;
@@ -359,30 +363,141 @@ h2 {
 
 .message p{
     color: #858282;
-    font-size: 23px;
+    font-size: 20px;
 }
 
 .message button{
-    background-color: transparent;
+    background-color: orangered;
     padding: 10px 20px;
     cursor: pointer;
     min-width: 120px;
     border-radius: 99px;
-    border: 2px solid rgb(255, 42, 0); 
-    box-shadow: 0 0 5px rgb(255, 42, 0), 0 0 10px rgb(255, 42, 0); 
+    border: 2px solid rgb(224, 220, 220); 
+    box-shadow: 0 0 5px rgb(153, 152, 152), 0 0 10px rgba(255, 255, 255, 0.208); 
 }
 #smth-spc{
-    font-family: "Work Sans";
+    font-family:  "Ubuntu";
     font-size: 16px;
-    font-weight: lighter;
+    font-weight: bolder;
     color: #ffffff;
     text-align: center;
 }
 
-#smth-spc:hover{
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.097), 0 0 10px rgba(255, 255, 255, 0.28);
-    transform: scale(1.1);
+#summary-mess{
+    color: #ffffff;
+    font-family: "Original Surfer";
+    font-size: 50px;
 }
+
+.message img{
+    max-width: 20%;
+    height: auto;
+}
+ .app-container#blur.active{
+    filter: blur(20px);
+    pointer-events: none;
+    user-select:none;
+ }
+
+#popup{
+    position: fixed;        /*Popup fixed */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+ }
+
+ #popup.active{
+    visibility: visible;
+    opacity:1;
+    transition: 0.5s;
+ }
+
+ .form{
+    flex-wrap: wrap;
+    padding: 40px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    border-radius: 50px;
+    background-color:rgb(63, 63, 62);
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+ }
+
+ .form form{
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+    gap: 30px;
+ }
+
+#popup-text{
+    text-align: center    ;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+.input-btn{
+    width: 100%;
+    max-width: 400px;
+    border-radius:10px;
+    height: 45px;
+    box-sizing: border-box;
+}
+
+.input-label{
+    font-size: 16px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.input-btn[type=text],
+.input-btn[type=number],
+.input-btn[type=date]{
+    padding-left: 10px;
+}
+
+
+.form-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 10px;
+}
+
+.save-btn{
+    display:flex;
+    margin-top: 30px;
+    margin-left: auto;
+}
+
+#save-btn{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center ;
+    border-radius:90px;
+    font-size:18px;
+    padding: 20px;
+    background-color: orangered;
+    color: white;
+    font-family:"Ubuntu";
+    font-weight: bolder;
+} 
+
 
 @media screen and (max-width: 800px) {
     .app-container {
@@ -443,5 +558,9 @@ h2 {
     .subject-card{
         align-items: center;
         justify-content: center;
+    }
+
+    #popup{
+        flex-wrap: wrap;
     }
 }

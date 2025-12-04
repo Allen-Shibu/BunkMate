@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
+    <div class="app-container" id="blur">
         
         <header>
             <img src="logo.png">
@@ -18,7 +18,7 @@
             <svg
                 width="16"
                 height="16"
-                viewBox="0 0 16 16"
+                viewBo  x="0 0 16 16"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
             >
@@ -40,14 +40,18 @@
 
         <hr>
 
-        <div class="empty-state">
+        <div class="empty-state" style="display: none;">
             <div class="message">
+                    <img src="empty-symbol2.png">
+                    <h1 id="summary-mess">No Subjects Yet!<br>
+                    Time to add one
+                </h1>
                 <p>Click below to add your first subject and get started </p>
-                <button id="smth-spc">Add subject</button>
+                <button id="smth-spc" onclick="toggle()">Add subject</button>
             </div>
         </div>
 
-        <div id="dashboard-view" data-tab="dashboard" style="display: none;">
+        <div id="dashboard-view" data-tab="dashboard" style="display: block;">
             <h2>Today's Schedule</h2>
 
             <div class="card-container">
@@ -82,7 +86,7 @@
         <div id="schedule-view" style="display: none;">
             <div class="action-btn">
                 <button class="edit-btn"><img src="edit-btn.png">Edit</button>
-                <button class="add-subject">+ Add Subject</button>
+                <button class="add-subject" onclick="toggle()">+ Add Subject</button>
             </div>
                 <div class="day-schedule">
                 <div class="week-card">
@@ -137,6 +141,34 @@
         </div>
 
     </div>
+    <div id="popup">
+            <h3 id="popup-text">Add Subject</h3>
+            <div class="form">
+                <form>
+                    <div class="form-group">
+                        <label class="input-label">Subject Name</label>
+                        <input class="input-btn"type="text" placeholder="Name of the subject">
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Number of classes attended</label>
+                        <input class="input-btn"type="number" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Total Classes </label>
+                        <input class="input-btn" type="number" placeholder="0">
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Semester end date</label>
+                        <input class="input-btn" type="date">
+                    </div>
+                </form>
+                <div class="save-btn">
+                    <button id="save-btn" onclick="toggle()">SAVE</button>
+                </div> 
+            </div>
+   
+    </div>
+
     <script src="index.js"></script>
 </body>
 </html>
