@@ -220,24 +220,8 @@ h2 {
     background-color: #969494;
 }
 
-.schedule-btn {
-    font-family: "Work Sans";
-    min-width: 120px;
-    border-radius: 99px;
-    color: rgb(237, 233, 233);
-    padding: 10px 20px;
-    font-size: 16px;
-    border: 2px solid rgb(255, 42, 0); 
-    box-shadow: 0 0 5px rgb(255, 42, 0), 0 0 10px rgb(255, 42, 0); 
-    text-align: center;
-    font-weight: lighter;
-    color: white;
-    background-color: transparent;
-    cursor: pointer;
-}
 
-.schedule-view{
-    margin-left: 5px;
+#schedule-view{
     margin-top: 10px;
     align-items: center;
     justify-content: center;
@@ -275,6 +259,7 @@ h2 {
     gap: 40px;
     justify-content: center;
     margin-top: 40px;
+    flex-wrap: wrap;
 }
 .week-card{
     background-color: rgba(255, 255, 255, 0.208);
@@ -326,7 +311,7 @@ h2 {
     height: 1px;
 } 
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
     .app-container {
         padding: 10px;
     }
@@ -372,13 +357,14 @@ h2 {
     .day-schedule{
         display: flex;
         flex-direction: column;
-        align-items: center
+        align-items: center;
+        flex-wrap: wrap;
     }
 
-    .schedule-view{
+    #schedule-view{
         align-items: center;
         justify-content: center;
-        margin: 0 auto;
+        flex-wrap: wrap;
     }
 
     .subject-card{
