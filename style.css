@@ -29,6 +29,8 @@ header {
 }
 
 header img {
+    padding-left: 30px;
+    padding-top: 30px;
     height: 50px;     
     width: auto;
 
@@ -306,6 +308,7 @@ h2 {
     justify-content: center;
     margin-top: 40px;
     flex-wrap: wrap;
+
 }
 .week-card{
     background-color: rgba(255, 255, 255, 0.208);
@@ -330,6 +333,7 @@ h2 {
 }
 
 .subject-card{
+    padding-top: 20px;
     background-color: rgba(255, 255, 255, 0.208);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius:25px;
@@ -519,8 +523,7 @@ select[name='takeation'] {
     cursor: pointer;
     font-size: 14px;
     font-family: inherit;
-    appearance: none; /* Hides default arrow in some browsers */
-    -webkit-appearance: none;
+
     text-align: center;
     text-align-last: center; /* Centers text in select */
 }
@@ -532,13 +535,6 @@ select[name='takeation'] option {
     
 }
 
-#schedule-grid {
-    display: flex;
-    gap: 15px;
-    overflow-x: auto; /* Allows scrolling sideways */
-    padding-bottom: 20px;
-    width: 100%;
-}
 
 @media screen and (max-width: 800px) {
     .app-container {

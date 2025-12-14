@@ -42,14 +42,14 @@
 
         <hr>
 
-        <div class="empty-state" style="display: none;">
+        <div class="empty-state" style="display: none;" onclick="toggle()">
             <div class="message">
                     <img src="empty-symbol2.png">
                     <h1 id="summary-mess">No Subjects Yet!<br>
                     Time to add one
                 </h1>
                 <p>Click below to add your first subject and get started </p>
-                <button id="smth-spc" onclick="toggle()">Add subject</button>
+                <button id="smth-spc">Add subject</button>
             </div>
         </div>
 
@@ -90,15 +90,56 @@
                 <button class="edit-btn"><img src="edit-btn.png">Edit</button>
                 <button class="add-subject" onclick="toggle()">+ Add Subject</button>
             </div>
-            
-            <div id="schedule-grid" class="schedule-grid"></div>
-                                <select name='takeation'>
-                                    <option class='head'>Add Subject</option>
-                                    <option value='Action 1'>Action 1</option>
-                                    <option value='Action 2'>Action 2</option>
-                                    <option value='Action 3'>Action 3</option>
-                                </select>
+                <div class="day-schedule">
+                <div class="week-card">
+                    <div class="day-card">
+                        <h2>MON</h2>
+                        <div class="subject-card">
+                            <div id="col-Monday" class="subjects">
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-card">
+                    <div class="day-card">
+                        <h2>TUE</h2>
+                        <div class="subject-card">
+                            <div id="col-Tuesday" class="subjects">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-card">
+                    <div class="day-card">
+                        <h2>WED</h2>
+                        <div class="subject-card">
+                            <div id="col-Wednesday" class="subjects">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-card">
+                    <div class="day-card">
+                        <h2>THUR</h2>
+                        <div class="subject-card">
+                            <div id="col-Thursday" class="subjects">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="week-card">
+                    <div class="day-card">
+                        <h2>FRI</h2>
+                        <div class="subject-card">
+                            <div id="col-Friday" class="subjects">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -125,7 +166,7 @@
                     </div>
                 </form>
                 <div class="save-btn">
-                    <button id="save-btn" onclick="toggle();save();">SAVE</button>
+                    <button id="save-btn" onclick="toggle();save();add_subject();">SAVE</button>
                 </div> 
             </div>
    

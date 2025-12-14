@@ -1,135 +1,153 @@
+const dashboardView = document.getElementById("dashboard-view");
+const emptyState = document.querySelector(".empty-state");
+const scheduleView = document.getElementById("schedule-view");
+const dashboardBtn = document.querySelector("button[onclick*='dashboard']");
+const scheduleBtn = document.querySelector("button[onclick*='schedule']");
 let subjects = JSON.parse(localStorage.getItem("skippit_subjects")) || [];
 let schedule = JSON.parse(localStorage.getItem("skippit_schedule")) || {
-    Monday: [],Tuesday: [],Wednesday: [],Thursday: [],Friday: []
+  Monday: [],
+  Tuesday: [],
+  Wednesday: [],
+  Thursday: [],
+  Friday: [],
 };
 
+const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderSchedule();
+  renderDashboard();
+});
+
 function switchTab(tabName) {
-  const dashboardView = document.getElementById("dashboard-view");
-  const scheduleView = document.getElementById("schedule-view");
-
-  const dashboardBtn = document.querySelector("button[onclick*='dashboard']");
-  const scheduleBtn = document.querySelector("button[onclick*='schedule']");
-
   if (tabName == "dashboard") {
     dashboardView.style.display = "block";
     scheduleView.style.display = "none";
 
-    scheduleBtn.removeAttribute("id");
-    dashboardBtn.setAttribute("id", "start");
+    if (scheduleBtn) scheduleBtn.removeAttribute("id");
+    if (dashboardBtn) dashboardBtn.setAttribute("id", "start");
   } else if (tabName == "schedule") {
     dashboardView.style.display = "none";
     scheduleView.style.display = "block";
 
-    dashboardBtn.removeAttribute("id");
-    scheduleBtn.setAttribute("id", "start");
+    if (dashboardBtn) dashboardBtn.removeAttribute("id");
+    if (scheduleBtn) scheduleBtn.setAttribute("id", "start");
+
+    renderSchedule();
   }
 }
-let SaveBtn = document.getElementById("save-btn");
+
+function renderDashboard() {
+  const subjects = JSON.parse(localStorage.getItem("skippit_subjects"));
+  if (!subjects || subjects.length === 0) {
+    dashboardView.style.display = "none";
+    scheduleView.style.display = "none";
+    emptyState.style.display = "block";
+    return;
+  }
+
+  emptyState.style.display = "none";
+  scheduleView.style.display = "block";
+  dashboardView.style.display = "block";
+}
+
 let Subject = document.getElementById("subject-name");
 let ClassNum = document.getElementById("class-num");
 let TotalClass = document.getElementById("total-class");
 let EndDate = document.getElementById("end-date");
 
 function save() {
-  if (Number(ClassNum.value) > Number(TotalClass.value)) {
-    alert("Total Classes cannot be less than attended classes");
-  }
-
   if (Subject.value === "") {
     alert("Please enter a subject name");
+    return;
   }
-    const newSubject = {
-        id: Date.now(),
-        name: Subject.value,
-        attended: Number(ClassNum.value),
-        total: Number(TotalClass.value),
-    };
+  if (Number(ClassNum.value) > Number(TotalClass.value)) {
+    alert("Total Classes cannot be less than attended classes");
+    return;
+  }
 
-    subjects.push(newSubject);
+  const newSubject = {
+    id: Date.now(),
+    name: Subject.value,
+    attended: Number(ClassNum.value),
+    total: Number(TotalClass.value),
+  };
 
-    localStorage.setItem("Subject_Name", JSON.stringify(subjects));
+  subjects.push(newSubject);
 
-    Subject.value = "";
-    ClassNum.value = "";
-    TotalClass.value = "";
+  localStorage.setItem("skippit_subjects", JSON.stringify(subjects));
+
+  Subject.value = "";
+  ClassNum.value = "";
+  TotalClass.value = "";
+
+  renderSchedule();
 }
 
 function toggle() {
   let blur = document.getElementById("blur");
-  blur.classList.toggle("active");
+  if (blur) blur.classList.toggle("active");
 
   let PopUp = document.getElementById("popup");
-  PopUp.classList.toggle("active");
+  if (PopUp) PopUp.classList.toggle("active");
 }
 
 function renderSchedule() {
-    const grid = document.getElementById('schedule-grid');
-    if (!grid) return; 
-    
-    grid.innerHTML = '';
+  const optionsHtml = subjects
+    .map((s) => `<option value="${s.id}">${s.name}</option>`)
+    .join("");
+  const placeholder =
+    '<option class="head" value="" disabled selected>Add Subject</option>';
 
-    // STEP A: Create the Options List from our 'subjects' basket
-    const optionsHtml = subjects.map(s => `<option value="${s.id}">${s.name}</option>`).join('');
-    const placeholder = '<option value="" disabled selected>+ Add Subject</option>';
+  daysOfWeek.forEach((day) => {
+    const col = document.getElementById(`col-${day}`);
+    if (!col) return;
 
-    // STEP B: Loop through every day and build the column
-    daysOfWeek.forEach(day => {
-        const daySubjectsIds = schedule[day] || [];
-        
-        // Build the cards for subjects already added to this day
-        let cardsHtml = '';
-        daySubjectsIds.forEach((id, index) => {
-            const sub = subjects.find(s => s.id === id);
-            if (sub) {
-                cardsHtml += `
-                    <div class="schedule-item">
-                        <span>${sub.name}</span>
-                        <button class="remove-schedule-btn" onclick="removeFromSchedule('${day}', ${index})">×</button>
+    const daySubjectsIds = schedule[day] || [];
+
+    let cardsHtml = "";
+    daySubjectsIds.forEach((id, index) => {
+      const sub = subjects.find((s) => s.id === id);
+      if (sub) {
+        cardsHtml += `
+                    <div class="subjects" style="margin-bottom: 10px; display:flex; justify-content:space-between; align-items:center;">
+                        <span style="color:white; font-size:20px; line-height:23px">${sub.name}</span>
+                        <button onclick="removeFromSchedule('${day}', ${index})" style="background:none; border:none; color:#ff5722; cursor:pointer; font-weight:bold;">×</button>
                     </div>
                 `;
-            }
-        });
+      }
+    });
 
-        // STEP C: Inject the Dropdown 
-        // Only show dropdown if we actually have subjects to choose from
-        const dropdownHtml = subjects.length > 0 ? `
-            <div class="schedule-dropdown-container">
-                <select class="schedule-dropdown" onchange="addSubjectFromDropdown('${day}', this)">
+    const dropdownHtml =
+      subjects.length > 0
+        ? `
+            <div class="subjects" style="margin-top: 10px; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 10px;">
+                <select onchange="addSubjectFromDropdown('${day}', this)" style="width:100%; font-size:20px; background:transparent; color: #aaa; border:none; outline:none; cursor:pointer;">
                     ${placeholder}
                     ${optionsHtml}
                 </select>
             </div>
-        ` : '<p style="font-size:12px; color:#888; margin-top:10px;">Create subjects first</p>';
+        `
+        : '<p style="font-size:12px; color:#666; text-align:center; margin-top:10px;">Create subjects first</p>';
 
-        // Add the column to the grid
-        grid.innerHTML += `
-            <div class="day-column">
-                <div class="day-header">${day.substring(0, 3)}</div>
-                ${cardsHtml}
-                ${dropdownHtml}
-            </div>
-        `;
-    });
+    col.innerHTML = cardsHtml + dropdownHtml;
+  });
 }
 
-// ---DROPDOWN HANDLER ---
 function addSubjectFromDropdown(day, selectElement) {
-    const subjectId = parseInt(selectElement.value);
+  const subjectId = parseInt(selectElement.value);
 
-    if (subjectId) {
-        // Add ID to the specific day
-        schedule[day].push(subjectId);
-        
-        // Save new schedule to fridge
-        localStorage.setItem('skippit_schedule', JSON.stringify(schedule));
-        
-        // Re-draw immediately to show the change
-        renderSchedule(); 
-    }
+  if (subjectId) {
+    schedule[day].push(subjectId);
+
+    localStorage.setItem("skippit_schedule", JSON.stringify(schedule));
+
+    renderSchedule();
+  }
 }
 
 function removeFromSchedule(day, index) {
-    schedule[day].splice(index, 1);
-    localStorage.setItem('skippit_schedule', JSON.stringify(schedule));
-    renderSchedule();
+  schedule[day].splice(index, 1);
+  localStorage.setItem("skippit_schedule", JSON.stringify(schedule));
+  renderSchedule();
 }
