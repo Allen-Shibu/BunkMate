@@ -81,7 +81,7 @@ function save() {
   ClassNum.value = "";
   TotalClass.value = "";
 
-  emptyDashboard();  
+  emptyDashboard();
   renderSchedule();
 }
 const popup = document.getElementById("popup");
