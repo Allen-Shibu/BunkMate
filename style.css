@@ -11,7 +11,7 @@ body {
     min-height: 100vh;
 }
 
-.app-container {
+.app-container {    
     display: flex;
     flex-direction: column; 
     padding: 20px;

@@ -15,14 +15,14 @@ let schedule = JSON.parse(localStorage.getItem("skippit_schedule")) || {
 const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
 document.addEventListener("DOMContentLoaded", () => {
-  TodayDashboard();
-  renderSchedule();
-  emptyDashboard();
+  const isEmpty = emptyDashboard()
+  if (!isEmpty) {
+    TodayDashboard();
+    renderSchedule();  
+  }
 });
 
 function switchTab(tabName) {
-  const isEmpty = emptyDashboard();
-  if (isEmpty) return;
   if (tabName == "dashboard") {
     dashboardView.style.display = "block";
     scheduleView.style.display = "none";
@@ -41,14 +41,19 @@ function switchTab(tabName) {
 
 function emptyDashboard() {
   const subjects = JSON.parse(localStorage.getItem("skippit_subjects"));
+
+  dashboardView.style.display = "block";
+  scheduleView.style.display = "none";
+
   if (!subjects || subjects.length === 0) {
-    dashboardView.style.display = "none";
-    scheduleView.style.display = "none";
     emptyState.style.display = "block";
-    return;
+    return true;
+  }
+  else {
+    emptyState.style.display = "none"; 
+    return false;
   }
 
-  emptyState.style.display = "none";
 }
 
 let Subject = document.getElementById("subject-name");
