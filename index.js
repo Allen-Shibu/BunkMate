@@ -152,7 +152,7 @@ function addSubjectFromDropdown(day, selectElement) {
 
 function removeFromSchedule(day, index) {
   schedule[day].splice(index, 1);
-  localStorage.setItem("skippit_schedule", JSON.stringify(today_schedule));
+  localStorage.setItem("skippit_schedule", JSON.stringify(schedule));
   renderSchedule();
 }
 
@@ -176,6 +176,7 @@ function TodayDashboard() {
   let today = day_schedule ? day_schedule[todayName] : [];
 
   const dashboard = document.querySelector(".card-container");
+  dashboard.innerHTML=""
   today_schedule.forEach((sub) => {
     let SubjectName = sub.name;
     let Attend = sub.attended;
@@ -187,16 +188,50 @@ function TodayDashboard() {
     const card = document.createElement("div");
     card.className = "attendance-card";
 
+    let ringColor;    
+      if (percentage < 75) {
+        ringColor = "#e20e0eff";
+      }
+
+      else if (percentage == 75) {
+        ringColor = "#facc15";
+      }
+
+      else {
+        ringColor="#43fa15ff"
+      }
+      
+    const R = 0.75;
+    const A = Number(Attend);
+    const T = Number(Total);
+    let MaxBunk = Math.floor((A - R * T) / R);
+    let MaxAttend = Math.ceil((R * T - A) / (1 - R));
+    if (MaxAttend < 0) {
+     MaxAttend = 0;
+    }
+    if (MaxBunk < 0) {
+      MaxBunk = 0;
+    }
+
+    let message;
+    if (percentage > 75) {
+      message=`You can bunk ${MaxBunk} classes`
+    }
+    else {
+      message=`You must attend ${MaxAttend} classes`
+    }
+
     card.innerHTML = `
       <div class="card-info">
         <h2>${SubjectName}</h2>
         <p class='stats'>${Attend} Attended</p>
         <p class='stats'>${Bunked} Bunked</p>
         <p class='stats'>${Total} Total</p>
+        <p class='stats'>${message}</p>
         <p class='stats'>Requirement: 75%</p>
       </div>
 
-      <div class="progress-bar"  style="--percent:${percentage}">
+      <div class="progress-bar"  style="--percent:${percentage};--ring-color:${ringColor};">
       <span class="progress-value">${percentage}%</span>
       </div>
 

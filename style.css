@@ -125,6 +125,7 @@ hr {
 }
 
 h2 {
+    margin-bottom: 200px;
     color: white;
     font-weight: bolder;
     font-size: 33px;
@@ -139,12 +140,11 @@ h2 {
 
 .card-container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap:wrap;
     gap: 30px;
     flex-direction: row;
-    align-items: left;
     width: 100%;
-    max-width: 1500px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -152,9 +152,10 @@ h2 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     background-image: url(card.png);
     background-size: cover;
-    width: 100%;
+    width: 40%;
     border-radius: 19px;
     min-height: 260px;  
     padding: 25px;
@@ -164,6 +165,7 @@ h2 {
 }
 
 .card-info {
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -177,6 +179,7 @@ h2 {
 }
 
 .stats {
+    
     color: #b4b4b4; 
     font-size: 16px;
     display: flex;
@@ -200,8 +203,8 @@ h2 {
 .progress-bar {
     position: relative;
     transform: translateX(-20px);
-    height: 140px;
-    width: 140px;
+    height: 160px;
+    width: 160px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -214,7 +217,9 @@ h2 {
     mask: radial-gradient(closest-side, transparent 80%, black 84%);
     content: "";
     position: absolute;
-    background: conic-gradient(#0cb303 calc(var(--percent) * 1%), #000000 0deg); 
+    background: conic-gradient(
+        var(--ring-color) calc(var(--percent) * 1%),
+        #000000 0deg);
     inset: 0;
     border-radius: 100%;
 }   
@@ -227,9 +232,10 @@ h2 {
 }
 
 .options {
+    
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 30px;
     margin-left: -25px;
     position: relative;
     z-index: 10;
